@@ -34,7 +34,7 @@
   --z-header:20;
   --z-sticky:30;
 }
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 body{
   font-family:'Inter Tight',sans-serif;
   background:var(--bg);
@@ -42,6 +42,7 @@ body{
   line-height:1.6;
   font-size:15px;
   overflow-x:hidden;
+  max-width:100vw;
 }
 a{color:inherit;text-decoration:none;}
 img{display:block;max-width:100%;}
@@ -112,15 +113,42 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 .header-btn:hover{background:var(--accent-hover);transform:translateY(-1px);}
 
 /* ─── HERO ─── */
-.hero{padding:72px 40px 56px;max-width:1080px;margin:0 auto;position:relative;}
+.hero{padding:72px 40px 56px;max-width:1080px;margin:0 auto;position:relative;overflow:hidden;}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text2);font-size:11px;font-weight:600;
+  background:linear-gradient(135deg,rgba(255,77,0,0.08) 0%,rgba(255,77,0,0.02) 100%);
+  border:1px solid rgba(255,77,0,0.25);
+  color:#ffb899;font-size:11px;font-weight:700;
   letter-spacing:0.1em;text-transform:uppercase;
-  padding:5px 14px;border-radius:100px;margin-bottom:28px;
+  padding:6px 16px;border-radius:100px;margin-bottom:28px;
+  position:relative;
+  box-shadow:0 0 0 0 rgba(255,77,0,0.3);
+  animation:badgeGlow 2.8s ease-in-out infinite;
 }
-.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.hero-badge::before{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:100px;
+  background:linear-gradient(90deg,transparent,rgba(255,77,0,0.4),transparent);
+  z-index:-1;
+  opacity:0;
+  animation:badgeShimmer 3s ease-in-out infinite;
+}
+@keyframes badgeGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,0.15),0 0 16px rgba(255,77,0,0.15);}
+  50%{box-shadow:0 0 0 3px rgba(255,77,0,0.08),0 0 32px rgba(255,77,0,0.35);}
+}
+@keyframes badgeShimmer{
+  0%,100%{opacity:0;}
+  50%{opacity:1;}
+}
+.hero-badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+  box-shadow:0 0 8px var(--accent),0 0 4px var(--accent);
+  animation:pulse 1.6s ease-in-out infinite;
+}
 .hero-headline-wrap{position:relative;margin-bottom:20px;}
 .hero h1{
   font-size:clamp(32px,5vw,62px);
@@ -141,10 +169,11 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
   position:absolute;
   top:50%;left:0;
   transform:translateY(-50%);
-  width:500px;height:200px;
+  width:min(500px,90vw);height:200px;
   background:radial-gradient(ellipse,rgba(255,77,0,0.12) 0%,transparent 70%);
   pointer-events:none;z-index:0;
   animation:glowPulse 4s ease-in-out infinite;
+  max-width:100%;
 }
 @keyframes glowPulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
 .hero-sub{font-size:16px;color:#8a847d;max-width:580px;margin-bottom:48px;line-height:1.7;font-weight:400;}
@@ -229,6 +258,47 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .chk svg{width:9px;height:9px;stroke:var(--green);fill:none;stroke-width:2.5;}
+/* lifetime access highlight with glow */
+.includes li.lifetime{
+  background:linear-gradient(90deg,rgba(255,77,0,0.08) 0%,transparent 100%);
+  border-radius:8px;
+  padding:10px 12px;
+  margin:4px -12px;
+  color:#fff;
+  font-weight:600;
+  border-bottom:1px solid transparent !important;
+  position:relative;
+  animation:lifetimeGlow 3s ease-in-out infinite;
+}
+.includes li.lifetime::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:8px;
+  border:1px solid rgba(255,77,0,0.3);
+  pointer-events:none;
+}
+.includes li.lifetime .chk{
+  background:var(--accent);
+  box-shadow:0 0 12px rgba(255,77,0,0.6);
+}
+.includes li.lifetime .chk svg{stroke:#fff;}
+.includes li.lifetime .lifetime-badge{
+  margin-left:auto;
+  font-size:9px;
+  font-weight:800;
+  color:var(--accent);
+  background:rgba(255,77,0,0.12);
+  padding:2px 7px;
+  border-radius:100px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  border:1px solid rgba(255,77,0,0.2);
+}
+@keyframes lifetimeGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,0.15),inset 0 0 0 0 transparent;}
+  50%{box-shadow:0 0 20px rgba(255,77,0,0.25),inset 0 0 20px rgba(255,77,0,0.04);}
+}
 
 /* ─── STATS BAR ─── */
 .stats-bar{
@@ -709,9 +779,10 @@ footer{
         <span class="chk" aria-hidden="true"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
         4 volume · 16+ lecții video
       </li>
-      <li>
+      <li class="lifetime">
         <span class="chk" aria-hidden="true"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
         Acces pe viață + update-uri incluse
+        <span class="lifetime-badge">Forever</span>
       </li>
       <li>
         <span class="chk" aria-hidden="true"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
@@ -870,7 +941,7 @@ footer{
     <div class="showcase-item sq">
       <div class="showcase-bg">
         <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-          <source src="kling_20260310_%E4%BD%9C%E5%93%81_With_a_rad_237_0.mp4" type="video/mp4">
+          <source src="kling-cinematic.mp4" type="video/mp4">
         </video>
       </div>
       <div class="showcase-overlay" aria-hidden="true"></div>
@@ -880,7 +951,7 @@ footer{
     <!-- wide: landscape image -->
     <div class="showcase-item wide">
       <div class="showcase-bg">
-        <img src="kling_20260306_%E4%BD%9C%E5%93%81____________2740_0.png" alt="AI generated visual" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <img src="kling-editorial.png" alt="AI generated visual" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="showcase-overlay" aria-hidden="true"></div>
       <span class="showcase-tag">Editorial AI</span>
@@ -890,7 +961,7 @@ footer{
     <div class="showcase-item tall">
       <div class="showcase-bg">
         <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-          <source src="Videoclip%20f%C4%83r%C4%83%20titlu.mp4" type="video/mp4">
+          <source src="clip-1.mp4" type="video/mp4">
         </video>
       </div>
       <div class="showcase-overlay" aria-hidden="true"></div>
