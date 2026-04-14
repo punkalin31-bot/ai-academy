@@ -743,6 +743,36 @@ footer{
   .guarantee-section{padding:56px 20px;}
 }
 
+/* ─── BACKGROUND VIDEO WRAPPER ─── */
+.bg-video-wrap{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.bg-video{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:-2;
+  pointer-events:none;
+}
+.bg-video-wrap::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.12) 0%,rgba(255,255,255,0.15) 60%,rgba(255,255,255,0.35) 100%);
+  z-index:-1;
+  pointer-events:none;
+}
+@supports (backdrop-filter:blur(1px)){
+  .bg-video-wrap::before{
+    backdrop-filter:blur(0.5px);
+    -webkit-backdrop-filter:blur(0.5px);
+  }
+}
+
 /* ─── GRADIENT BORDER UTIL ─── */
 .grad-border{
   position:relative;
@@ -793,6 +823,12 @@ footer{
   </div>
   <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
 </header>
+
+<!-- BACKGROUND VIDEO WRAPPER START -->
+<div class="bg-video-wrap">
+  <video class="bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="hero-bg.mp4" type="video/mp4">
+  </video>
 
 <!-- HERO -->
 <section class="hero" aria-label="Hero section">
@@ -852,6 +888,9 @@ footer{
     </ul>
   </div>
 </div>
+
+</div>
+<!-- BACKGROUND VIDEO WRAPPER END -->
 
 <!-- STATS BAR -->
 <div class="stats-bar" aria-label="Statistici curs">
