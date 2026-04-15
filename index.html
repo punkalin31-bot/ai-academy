@@ -84,8 +84,32 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
   color:#b8470a;
   position:relative;
   z-index:var(--z-flash);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  flex-wrap:wrap;
 }
 .flash strong{color:#1a1714;font-weight:700;}
+.flash-strike{
+  text-decoration:line-through;
+  color:#b8470a;
+  font-weight:600;
+  opacity:0.7;
+  margin-right:4px;
+}
+.flash-badge{
+  display:inline-block;
+  background:#e03030;
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  padding:2px 9px;
+  border-radius:100px;
+  letter-spacing:0.04em;
+  margin-right:4px;
+  vertical-align:middle;
+}
 .flash-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin:0 10px;vertical-align:middle;animation:pulse 1.8s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);}}
 
@@ -807,15 +831,6 @@ footer{
 </head>
 <body>
 
-<!-- FLASH BAR -->
-<div class="flash">
-  <strong>⚡ Oferta de lansare: 47€ în loc de 112€</strong>
-  <span class="flash-dot"></span>
-  🔥 Doar <strong>20 de locuri</strong> rămase
-  <span class="flash-dot"></span>
-  Oferta expiră în <strong id="countdown">--:--:--</strong>
-</div>
-
 <!-- HEADER -->
 <header class="header">
   <div class="logo">
@@ -823,6 +838,16 @@ footer{
   </div>
   <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
 </header>
+
+<!-- FLASH BAR -->
+<div class="flash">
+  <span class="flash-strike">112€</span>
+  <span class="flash-badge">-58% REDUCERE</span>
+  <span class="flash-dot"></span>
+  🔥 Doar <strong>20 de locuri</strong> rămase
+  <span class="flash-dot"></span>
+  Oferta expiră în <strong id="countdown">--:--:--</strong>
+</div>
 
 <!-- BACKGROUND VIDEO WRAPPER START -->
 <div class="bg-video-wrap">
