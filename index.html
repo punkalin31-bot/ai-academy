@@ -371,47 +371,72 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 .benefit-card h3{font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px;letter-spacing:-0.01em;}
 .benefit-card p{font-size:12.5px;color:var(--text2);line-height:1.6;}
 
-/* ─── SHOWCASE GRID ─── */
+/* ─── SHOWCASE V2 ─── */
 .showcase-section{padding:64px 0 0;}
-.showcase-grid{
+.showcase-v2-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:auto auto;
-  gap:10px;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
 }
-@media(max-width:680px){.showcase-grid{grid-template-columns:1fr 1fr;}}
-.showcase-item{
-  border-radius:12px;overflow:hidden;
+@media(max-width:640px){.showcase-v2-grid{grid-template-columns:1fr;gap:16px;}}
+
+.showcase-v2-card{
+  background:var(--bg2);
   border:1px solid var(--border);
-  position:relative;background:var(--bg3);
-}
-.showcase-item.tall{aspect-ratio:9/16;}
-.showcase-item.wide{aspect-ratio:16/9;grid-column:span 2;}
-.showcase-item.sq{aspect-ratio:1/1;}
-.showcase-bg{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
+  border-radius:18px;
   overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  cursor:default;
 }
-.showcase-item.c1 .showcase-bg{background:linear-gradient(135deg,#f0ece6 0%,#e8e0d6 100%);}
-.showcase-item.c2 .showcase-bg{background:linear-gradient(135deg,#eef0ec 0%,#dde6d4 100%);}
-.showcase-item.c3 .showcase-bg{background:linear-gradient(135deg,#f0ecee 0%,#e6d4de 100%);}
-.showcase-item.c4 .showcase-bg{background:linear-gradient(135deg,#f0ede8 0%,#e6ddd0 100%);}
-.showcase-item.c5 .showcase-bg{background:linear-gradient(135deg,#ececf0 0%,#d6dce8 100%);}
-.showcase-item.c6 .showcase-bg{background:linear-gradient(135deg,#f0ece8 0%,#e8ddd0 100%);}
-.showcase-inner-icon{width:40px;height:40px;opacity:0.2;}
-.showcase-inner-icon svg{width:40px;height:40px;stroke:var(--text);fill:none;stroke-width:1;}
-.showcase-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 60%);
+.showcase-v2-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 48px rgba(0,0,0,0.08);
+  border-color:rgba(255,77,0,0.2);
 }
-.showcase-tag{
-  position:absolute;bottom:10px;left:10px;
-  background:rgba(0,0,0,0.55);color:#fff;
-  font-size:10px;font-weight:700;
-  padding:3px 10px;border-radius:100px;
-  backdrop-filter:blur(6px);
-  letter-spacing:0.06em;text-transform:uppercase;
+.showcase-v2-media{
+  position:relative;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:var(--bg3);
+}
+.showcase-v2-media video{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+/* placeholder card */
+.sc-placeholder{
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--bg3) 0%,var(--beige) 100%);
+}
+.sc-placeholder-inner{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--muted);
+}
+.sc-placeholder-inner svg{stroke:var(--muted);opacity:0.5;}
+.sc-placeholder-inner span{font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;}
+
+/* number badge */
+.sc-num{
+  position:absolute;top:12px;left:12px;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,0.9);
+  color:var(--accent);
+  font-size:10px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  letter-spacing:0.02em;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+.showcase-v2-info{
+  padding:18px 22px 22px;
+}
+.showcase-v2-info h3{
+  font-size:16px;font-weight:800;
+  color:var(--text);
+  margin-bottom:6px;letter-spacing:-0.02em;
+}
+.showcase-v2-info p{
+  font-size:13px;color:var(--text2);line-height:1.65;
 }
 
 /* ─── VOLUMES ─── */
@@ -767,35 +792,8 @@ footer{
   .guarantee-section{padding:56px 20px;}
 }
 
-/* ─── BACKGROUND VIDEO WRAPPER ─── */
-.bg-video-wrap{
-  position:relative;
-  overflow:hidden;
-  isolation:isolate;
-}
-.bg-video{
-  position:absolute;
-  top:0;left:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:center;
-  z-index:-2;
-  pointer-events:none;
-}
-.bg-video-wrap::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,0.12) 0%,rgba(255,255,255,0.15) 60%,rgba(255,255,255,0.35) 100%);
-  z-index:-1;
-  pointer-events:none;
-}
-@supports (backdrop-filter:blur(1px)){
-  .bg-video-wrap::before{
-    backdrop-filter:blur(0.5px);
-    -webkit-backdrop-filter:blur(0.5px);
-  }
-}
+/* ─── HERO BG subtle warm gradient ─── */
+.hero{background:linear-gradient(160deg,rgba(255,245,238,0.6) 0%,rgba(255,255,255,0) 60%);}
 
 /* ─── GRADIENT BORDER UTIL ─── */
 .grad-border{
@@ -844,16 +842,10 @@ footer{
   <span class="flash-strike">112€</span>
   <span class="flash-badge">-58% REDUCERE</span>
   <span class="flash-dot"></span>
-  🔥 Doar <strong>17 locuri</strong> rămase
+  🔥 Doar <strong>20 de locuri</strong> rămase
   <span class="flash-dot"></span>
   Oferta expiră în <strong id="countdown">--:--:--</strong>
 </div>
-
-<!-- BACKGROUND VIDEO WRAPPER START -->
-<div class="bg-video-wrap">
-  <video class="bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-    <source src="hero-bg.mp4" type="video/mp4">
-  </video>
 
 <!-- HERO -->
 <section class="hero" aria-label="Hero section">
@@ -913,9 +905,6 @@ footer{
     </ul>
   </div>
 </div>
-
-</div>
-<!-- BACKGROUND VIDEO WRAPPER END -->
 
 <!-- STATS BAR -->
 <div class="stats-bar" aria-label="Statistici curs">
@@ -1023,66 +1012,69 @@ footer{
 <section class="showcase-section container reveal" aria-labelledby="showcase-title">
   <div class="section-label">Creat 100% cu AI</div>
   <h2 class="section-title" id="showcase-title">Asta poți crea după curs</h2>
-  <div class="showcase-grid">
+  <div class="showcase-v2-grid">
 
-    <!-- tall: portrait video -->
-    <div class="showcase-item tall">
-      <div class="showcase-bg">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-          <source src="video-1.mp4" type="video/mp4">
+    <!-- Hollywood VFX -->
+    <div class="showcase-v2-card">
+      <div class="showcase-v2-media">
+        <video class="sc-cycle"
+          data-videos="showcase-videos/vfx-1.mp4,showcase-videos/vfx-2.mp4,showcase-videos/vfx-3.mp4"
+          autoplay muted playsinline preload="auto">
+          <source src="showcase-videos/vfx-1.mp4" type="video/mp4">
         </video>
+        <span class="sc-num">01</span>
       </div>
-      <div class="showcase-overlay" aria-hidden="true"></div>
-      <span class="showcase-tag">B-Roll AI</span>
+      <div class="showcase-v2-info">
+        <h3>Hollywood VFX</h3>
+        <p>Efecte vizuale cinematice generate cu AI — explozie de culori, particule și tranziții de film gata de folosit în orice proiect.</p>
+      </div>
     </div>
 
-    <!-- wide: landscape image -->
-    <div class="showcase-item wide">
-      <div class="showcase-bg">
-        <img src="image-1.png" alt="AI generated visual" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="showcase-overlay" aria-hidden="true"></div>
-      <span class="showcase-tag">Imagine AI</span>
-    </div>
-
-    <!-- square: image -->
-    <div class="showcase-item sq">
-      <div class="showcase-bg">
-        <img src="image-2.png" alt="AI generated visual" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="showcase-overlay" aria-hidden="true"></div>
-      <span class="showcase-tag">Fashion Ad</span>
-    </div>
-
-    <!-- square: video -->
-    <div class="showcase-item sq">
-      <div class="showcase-bg">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-          <source src="kling-cinematic.mp4" type="video/mp4">
+    <!-- Consistenta Personaj -->
+    <div class="showcase-v2-card">
+      <div class="showcase-v2-media">
+        <video class="sc-cycle"
+          data-videos="showcase-videos/consistenta-1.mp4,showcase-videos/consistenta-2.mp4,showcase-videos/consistenta-3.mp4"
+          autoplay muted playsinline preload="auto">
+          <source src="showcase-videos/consistenta-1.mp4" type="video/mp4">
         </video>
+        <span class="sc-num">02</span>
       </div>
-      <div class="showcase-overlay" aria-hidden="true"></div>
-      <span class="showcase-tag">Cinematic B-Roll</span>
+      <div class="showcase-v2-info">
+        <h3>Consistență Personaj</h3>
+        <p>Generezi același personaj în orice scenă, orice unghiuri și orice ținute — cu consistență perfectă la fiecare frame.</p>
+      </div>
     </div>
 
-    <!-- wide: landscape image -->
-    <div class="showcase-item wide">
-      <div class="showcase-bg">
-        <img src="kling-editorial.png" alt="AI generated visual" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+    <!-- Clone Yourself - placeholder -->
+    <div class="showcase-v2-card">
+      <div class="showcase-v2-media sc-placeholder">
+        <div class="sc-placeholder-inner" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M15 3.5c1.7.5 3 2 3 3.5"/><path d="M9 3.5C7.3 4 6 5.5 6 7"/></svg>
+          <span>Video în curând</span>
+        </div>
+        <span class="sc-num">03</span>
       </div>
-      <div class="showcase-overlay" aria-hidden="true"></div>
-      <span class="showcase-tag">Editorial AI</span>
+      <div class="showcase-v2-info">
+        <h3>Clonează-te pe Tine</h3>
+        <p>Creezi un avatar AI cu vocea și chipul tău — publici conținut fără să filmezi, fără echipament, fără studio.</p>
+      </div>
     </div>
 
-    <!-- tall: portrait video -->
-    <div class="showcase-item tall">
-      <div class="showcase-bg">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-          <source src="clip-1.mp4" type="video/mp4">
+    <!-- Cinematic B-Roll -->
+    <div class="showcase-v2-card">
+      <div class="showcase-v2-media">
+        <video class="sc-cycle"
+          data-videos="showcase-videos/cinematic-1.mp4,showcase-videos/cinematic-2.mp4,showcase-videos/cinematic-3.mp4"
+          autoplay muted playsinline preload="auto">
+          <source src="showcase-videos/cinematic-1.mp4" type="video/mp4">
         </video>
+        <span class="sc-num">04</span>
       </div>
-      <div class="showcase-overlay" aria-hidden="true"></div>
-      <span class="showcase-tag">Reclama AI</span>
+      <div class="showcase-v2-info">
+        <h3>B-Roll Cinematic</h3>
+        <p>B-roll de calitate profesională generat cu AI — atmosferă, culoare și mișcare cinematică fără cameră sau echipă.</p>
+      </div>
     </div>
 
   </div>
@@ -1453,6 +1445,20 @@ var revealObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(function(el) {
   revealObserver.observe(el);
+});
+
+// ─── SHOWCASE VIDEO CYCLE ───
+document.querySelectorAll('.sc-cycle').forEach(function(video) {
+  var list = video.getAttribute('data-videos').split(',');
+  var idx = 0;
+  video.addEventListener('ended', function() {
+    idx = (idx + 1) % list.length;
+    video.src = list[idx];
+    video.load();
+    video.play().catch(function(){});
+  });
+  // start playing, autoplay handles first one
+  video.play().catch(function(){});
 });
 
 // ─── REDUCED MOTION CHECK ───
