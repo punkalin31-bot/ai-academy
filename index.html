@@ -466,6 +466,42 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 .volume-item h3{font-size:14.5px;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em;}
 .volume-item p{font-size:12.5px;color:var(--text2);line-height:1.6;}
 
+/* ─── GRAPHICS SECTION ─── */
+.graphics-section{padding:64px 0 0;}
+.graphics-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media(max-width:600px){.graphics-grid{grid-template-columns:1fr;gap:14px;}}
+.graphics-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+}
+.graphics-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.07);
+  border-color:rgba(255,77,0,0.2);
+}
+.graphics-img{
+  aspect-ratio:4/3;
+  overflow:hidden;
+  background:var(--bg3);
+}
+.graphics-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.4s ease;
+}
+.graphics-card:hover .graphics-img img{transform:scale(1.03);}
+.graphics-info{padding:16px 20px 20px;}
+.graphics-info h3{font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;letter-spacing:-0.02em;}
+.graphics-info p{font-size:13px;color:var(--text2);line-height:1.65;}
+
 /* ─── INSTRUCTORS ─── */
 .instructors-section{padding:72px 0 0;}
 .instructors-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
@@ -479,15 +515,40 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 }
 .inst-card:hover{border-color:rgba(255,77,0,0.2);box-shadow:0 8px 24px rgba(255,77,0,0.06);}
 .inst-avatar{
-  width:88px;height:88px;border-radius:50%;
+  width:96px;height:96px;border-radius:50%;
   margin:0 auto 16px;
   display:flex;align-items:center;justify-content:center;
   font-size:28px;font-weight:900;color:#fff;letter-spacing:-0.02em;
   font-family:'Inter Tight',sans-serif;
-  box-shadow:0 4px 16px rgba(0,0,0,0.1);
+  box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent),0 8px 24px rgba(255,77,0,0.2);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.inst-avatar-photo{background:var(--bg3);}
+.inst-avatar-photo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  border-radius:50%;
 }
 .avatar-a{background:linear-gradient(135deg,#ff4d00 0%,#ff8040 100%);}
 .avatar-d{background:linear-gradient(135deg,#5b4cf5 0%,#9b8cff 100%);}
+
+/* ─── GUARANTEE EXTRAS ─── */
+.guarantee-extras{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;
+}
+.g-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(62,168,50,0.08);
+  border:1px solid rgba(62,168,50,0.2);
+  color:var(--green);
+  font-size:11.5px;font-weight:700;
+  padding:4px 12px;border-radius:100px;
+  letter-spacing:0.03em;
+}
+.g-tag svg{stroke:var(--green);flex-shrink:0;}
 .inst-name{font-size:20px;font-weight:900;color:var(--text);margin-bottom:3px;letter-spacing:-0.03em;}
 .inst-role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;font-weight:700;}
 .inst-bio{font-size:13px;color:var(--text2);line-height:1.65;}
@@ -1057,15 +1118,54 @@ footer{
       </div>
     </div>
 
-    <!-- Imagini & Grafice AI -->
-    <div class="showcase-v2-card sc-full">
-      <div class="showcase-v2-media">
-        <img src="grafica.png" alt="Imagini si grafice generate cu AI" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
-        <span class="sc-num">07</span>
+  </div>
+</section>
+
+<hr class="divider container" style="max-width:1080px;margin:64px auto 0;">
+
+<!-- GRAPHICS & DESIGN SECTION -->
+<section class="graphics-section container reveal" aria-labelledby="graphics-title">
+  <div class="section-label">Creat cu AI</div>
+  <h2 class="section-title" id="graphics-title">Sari peste Photoshop — grafice profesionale în secunde</h2>
+  <div class="graphics-grid">
+
+    <div class="graphics-card">
+      <div class="graphics-img">
+        <img src="https://res.cloudinary.com/dpe5hpxir/image/upload/q_auto,f_auto/v1776340908/ChatGPT_Image_Feb_11_2026_03_44_19_PM_ttuwks.png" alt="Logo Design AI" loading="lazy">
       </div>
-      <div class="showcase-v2-info">
-        <h3>Imagini &amp; Grafice AI</h3>
-        <p>Thumbnails, bannere, mockup-uri, postere și brand visuals generate în secunde — fără Photoshop, fără designer.</p>
+      <div class="graphics-info">
+        <h3>Logo Design</h3>
+        <p>Generezi 100 de variante de logo în minute — găsești exact ce cauți fără designer și fără costuri mari.</p>
+      </div>
+    </div>
+
+    <div class="graphics-card">
+      <div class="graphics-img">
+        <img src="https://res.cloudinary.com/dpe5hpxir/image/upload/q_auto,f_auto/v1776340794/ChatGPT_Image_Feb_2_2026_01_26_00_PM_u9zbeg.png" alt="Website Graphics AI" loading="lazy">
+      </div>
+      <div class="graphics-info">
+        <h3>Grafice Website</h3>
+        <p>Bannere, hero images și vizualuri pentru site generate cu AI — calitate profesională în câteva secunde.</p>
+      </div>
+    </div>
+
+    <div class="graphics-card">
+      <div class="graphics-img">
+        <img src="https://res.cloudinary.com/dpe5hpxir/image/upload/q_auto,f_auto/v1776341066/hf_20260209_131400_a32816f8-7fe0-402f-99d3-f38f8d8a2103_yoz8gv.png" alt="Channel Art AI" loading="lazy">
+      </div>
+      <div class="graphics-info">
+        <h3>Channel Art</h3>
+        <p>Banner YouTube, cover-uri și identitate vizuală pentru canalul tău — generate cu AI în câteva minute.</p>
+      </div>
+    </div>
+
+    <div class="graphics-card">
+      <div class="graphics-img">
+        <img src="https://res.cloudinary.com/dpe5hpxir/image/upload/q_auto,f_auto/v1776341156/56245b19-c252-45bd-bad3-87daeddebb8e_x26prn.png" alt="Product Marketing AI" loading="lazy">
+      </div>
+      <div class="graphics-info">
+        <h3>Marketing de Produs</h3>
+        <p>Mockup-uri, postere și vizualuri pentru reclame Facebook &amp; Google — controlezi fiecare element cu AI.</p>
       </div>
     </div>
 
@@ -1183,17 +1283,21 @@ footer{
   <div class="instructors-grid">
 
     <div class="inst-card">
-      <div class="inst-avatar avatar-a" aria-hidden="true">A</div>
+      <div class="inst-avatar inst-avatar-photo">
+        <img src="https://res.cloudinary.com/dpe5hpxir/image/upload/q_auto,f_auto,g_face,c_fill,w_200,h_200/v1776341223/WhatsApp_Image_2026-04-16_at_15.04.05_kw33az.jpg" alt="Alin">
+      </div>
       <div class="inst-name">Alin</div>
       <div class="inst-role">Co-fondator · Content Creator</div>
-      <p class="inst-bio">Creator de conținut cu experiență practică în AI. Am testat zeci de tooluri și workflow-uri ca să îți ofer doar ce funcționează cu adevărat în procesul de creație zilnic.</p>
+      <p class="inst-bio">Specialist în automatizări și workflow-uri AI. Construiesc sisteme care ajută creatorii să scaleze conținutul fără să lucreze mai mult sau să se epuizeze.</p>
     </div>
 
     <div class="inst-card">
-      <div class="inst-avatar avatar-d" aria-hidden="true">D</div>
+      <div class="inst-avatar inst-avatar-photo">
+        <img src="https://res.cloudinary.com/dpe5hpxir/image/upload/q_auto,f_auto,g_face,c_fill,w_200,h_200/v1776341223/WhatsApp_Image_2026-04-16_at_14.35.09_r06fga.jpg" alt="Denis">
+      </div>
       <div class="inst-name">Denis</div>
       <div class="inst-role">Co-fondator · AI Specialist</div>
-      <p class="inst-bio">Specialist în automatizări și workflow-uri AI. Construiesc sisteme care ajută creatorii să scaleze conținutul fără să lucreze mai mult sau să se epuizeze.</p>
+      <p class="inst-bio">Creator de conținut cu experiență practică în AI. Am testat zeci de tooluri și workflow-uri ca să îți ofer doar ce funcționează cu adevărat în procesul de creație zilnic.</p>
     </div>
 
   </div>
@@ -1349,8 +1453,13 @@ footer{
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg>
     </div>
     <div class="guarantee-body">
-      <h3>Garanție <span>30 de zile</span></h3>
-      <p>Dacă parcurgi cursul și simți că nu ți-a adus valoare, îți returnăm banii integral în primele 30 de zile de la cumpărare. Fără întrebări, fără birocrație. Riscul este zero — al nostru, nu al tău.</p>
+      <h3>Garanție <span>30 de zile</span> + Apel 1-1 Gratuit</h3>
+      <p>După ce intri în curs, programăm un <strong style="color:var(--text);">apel 1-1 complet gratuit</strong> cu noi — vedem exact unde ești blocat și ce trebuie să faci diferit. Dacă după curs <em>și</em> apel tot simți că nu ți-a adus nicio valoare, îți returnăm banii integral în primele 30 de zile. Fără întrebări, fără birocrație. Riscul este zero — al nostru, nu al tău.</p>
+      <div class="guarantee-extras">
+        <span class="g-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.12 6.12l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg> Apel 1-1 gratuit inclus</span>
+        <span class="g-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 30 zile money-back</span>
+        <span class="g-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Fără întrebări</span>
+      </div>
     </div>
   </div>
 </section>
