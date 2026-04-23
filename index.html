@@ -122,7 +122,9 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
   background:rgba(255,255,255,0.92);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
+  gap:12px;
 }
+.header-right{display:flex;align-items:center;gap:10px;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .logo-icon svg{width:14px;height:14px;fill:#fff;}
@@ -212,40 +214,36 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;padding:0 20px;}}
 
 /* ─── VSL PLAYER ─── */
-.vsl-overlay{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+.vsl-sound-badge{
+  position:absolute;top:12px;left:12px;
+  display:flex;align-items:center;gap:7px;
+  background:rgba(0,0,0,0.62);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:100px;
+  padding:6px 14px 6px 10px;
   cursor:pointer;
-  background:rgba(0,0,0,0.42);
-  border-radius:14px;
-  z-index:4;
-  transition:opacity 0.3s;
-}
-.vsl-overlay.hidden{opacity:0;pointer-events:none;}
-.vsl-sound-icon{
-  width:68px;height:68px;border-radius:50%;
-  background:rgba(255,255,255,0.13);
-  border:2px solid rgba(255,255,255,0.45);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:14px;
-  backdrop-filter:blur(4px);
-}
-.vsl-sound-label{
+  z-index:10;
   color:#fff;
   font-family:'Inter Tight',sans-serif;
-  font-size:12px;font-weight:800;
-  letter-spacing:0.1em;text-transform:uppercase;
-  text-shadow:0 1px 6px rgba(0,0,0,0.6);
+  font-size:12px;font-weight:700;
+  letter-spacing:0.02em;
+  transition:opacity 0.25s,transform 0.2s;
+  white-space:nowrap;
+  user-select:none;
 }
-.vsl-progress-track{
-  position:absolute;bottom:10px;left:12px;right:12px;
-  height:3px;background:rgba(255,255,255,0.18);border-radius:2px;z-index:5;
-  pointer-events:none;
-}
-.vsl-progress-fill{
-  height:100%;width:0%;
-  background:var(--accent);border-radius:2px;
-  transition:width 0.25s linear;
+.vsl-sound-badge:hover{background:rgba(0,0,0,0.78);transform:scale(1.03);}
+.vsl-sound-badge.muted-off{opacity:0;pointer-events:none;}
+.vsl-sound-badge svg{flex-shrink:0;}
+
+/* ─── HEADER PRICE ─── */
+.header-price{display:flex;align-items:center;gap:6px;margin-right:10px;}
+.header-old-price{text-decoration:line-through;color:var(--muted);font-size:13px;font-weight:600;opacity:0.8;}
+.header-disc-badge{
+  background:var(--accent);color:#fff;
+  font-size:10px;font-weight:800;
+  padding:2px 8px;border-radius:100px;
+  letter-spacing:0.04em;white-space:nowrap;
 }
 
 /* ─── VIDEO BOX ─── */
@@ -822,6 +820,8 @@ footer{
   .flash-dot{display:none;}
   .flash-badge{font-size:8.5px;padding:2px 6px;}
   .header{padding:11px 18px;}
+  .header-old-price{display:none;}
+  .vsl-sound-badge{font-size:11px;padding:5px 12px 5px 9px;}
 }
 
 /* ─── COUNTDOWN ─── */
@@ -937,9 +937,6 @@ footer{
 
 <!-- FLASH BAR -->
 <div class="flash">
-  <span class="flash-strike">215€</span>
-  <span class="flash-badge">-73% REDUCERE</span>
-  <span class="flash-dot"></span>
   🔥 Doar <strong>17 de locuri</strong> rămase
   <span class="flash-dot"></span>
   Oferta expiră în <strong id="countdown">--:--:--</strong>
@@ -948,9 +945,18 @@ footer{
 <!-- HEADER -->
 <header class="header">
   <div class="logo">
-    <img src="logo.png" alt="Content cu AI" height="36" style="height:36px;width:auto;display:block;">
+    <div class="logo-icon">
+      <svg viewBox="0 0 14 14"><polygon points="7,1 13,4 13,10 7,13 1,10 1,4" fill="#fff"/></svg>
+    </div>
+    <span class="logo-text">Content <span>cu AI</span></span>
   </div>
-  <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
+  <div class="header-right">
+    <div class="header-price">
+      <span class="header-old-price">215€</span>
+      <span class="header-disc-badge">-73% REDUCERE</span>
+    </div>
+    <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
+  </div>
 </header>
 
 <!-- HERO -->
@@ -969,25 +975,19 @@ footer{
 <!-- HERO GRID: VIDEO + PRICE CARD -->
 <div class="hero-grid">
   <!-- VSL Video -->
-  <div class="video-box vsl-box" id="vslBox">
-    <video id="vslVideo" autoplay muted playsinline preload="auto"
+  <div class="video-box vsl-box" id="vslBox" style="position:relative;">
+    <video id="vslVideo" autoplay muted playsinline preload="auto" controls
       style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;">
       <source src="https://assets.cdn.filesafe.space/ibeemZvlqhWQCUyb9xkt/media/69e9fac5a1636a6c65718481.mp4" type="video/mp4">
     </video>
-    <!-- Sound overlay -->
-    <div class="vsl-overlay" id="vslOverlay">
-      <div class="vsl-sound-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-          <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white"/>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-        </svg>
-      </div>
-      <span class="vsl-sound-label">Click pentru sunet</span>
-    </div>
-    <!-- Progress bar -->
-    <div class="vsl-progress-track">
-      <div class="vsl-progress-fill" id="vslBar"></div>
+    <!-- Compact sound badge -->
+    <div class="vsl-sound-badge" id="vslSoundBadge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <line x1="17" y1="1" x2="7" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Tap pentru sunet
     </div>
   </div>
 
@@ -1740,48 +1740,22 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   });
 })();
 
-// ─── VSL PLAYER: autoplay muted + click-to-unmute + progress bar ───
+// ─── VSL PLAYER: autoplay muted + compact sound badge ───
 (function() {
   var video = document.getElementById('vslVideo');
-  var overlay = document.getElementById('vslOverlay');
-  var bar = document.getElementById('vslBar');
-  if (!video || !overlay || !bar) return;
+  var badge = document.getElementById('vslSoundBadge');
+  if (!video || !badge) return;
 
-  // Fake progress: start at ~82%, move to 100% fast in 2.5s, then follow real progress
-  var fakePhase = true;
-  var fakeStart = null;
-  var fakeDuration = 2500; // ms
-  var fakeStartPct = 82;
-
-  function rafLoop() {
-    if (fakePhase) {
-      if (!fakeStart) fakeStart = Date.now();
-      var elapsed = Date.now() - fakeStart;
-      var pct = fakeStartPct + ((elapsed / fakeDuration) * (100 - fakeStartPct));
-      if (pct >= 100 || elapsed >= fakeDuration) {
-        fakePhase = false;
-        pct = 100;
-      }
-      bar.style.width = pct + '%';
-    } else {
-      if (video.duration) {
-        bar.style.width = (video.currentTime / video.duration * 100) + '%';
-      }
-    }
-    requestAnimationFrame(rafLoop);
-  }
-  requestAnimationFrame(rafLoop);
-
-  // Click overlay → unmute
-  overlay.addEventListener('click', function() {
+  // Click badge → unmute, hide badge
+  badge.addEventListener('click', function(e) {
+    e.stopPropagation();
     video.muted = false;
     video.volume = 1;
-    overlay.classList.add('hidden');
-    // Daca video s-a oprit, porneste-l
+    badge.classList.add('muted-off');
     if (video.paused) video.play().catch(function(){});
   });
 
-  // Try autoplay
+  // Try autoplay muted
   var p = video.play();
   if (p && p.catch) p.catch(function(){});
 })();
