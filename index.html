@@ -211,6 +211,43 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 .hero-grid{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;max-width:1080px;margin:0 auto 80px;padding:0 40px;}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;padding:0 20px;}}
 
+/* ─── VSL PLAYER ─── */
+.vsl-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;
+  background:rgba(0,0,0,0.42);
+  border-radius:14px;
+  z-index:4;
+  transition:opacity 0.3s;
+}
+.vsl-overlay.hidden{opacity:0;pointer-events:none;}
+.vsl-sound-icon{
+  width:68px;height:68px;border-radius:50%;
+  background:rgba(255,255,255,0.13);
+  border:2px solid rgba(255,255,255,0.45);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+  backdrop-filter:blur(4px);
+}
+.vsl-sound-label{
+  color:#fff;
+  font-family:'Inter Tight',sans-serif;
+  font-size:12px;font-weight:800;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-shadow:0 1px 6px rgba(0,0,0,0.6);
+}
+.vsl-progress-track{
+  position:absolute;bottom:10px;left:12px;right:12px;
+  height:3px;background:rgba(255,255,255,0.18);border-radius:2px;z-index:5;
+  pointer-events:none;
+}
+.vsl-progress-fill{
+  height:100%;width:0%;
+  background:var(--accent);border-radius:2px;
+  transition:width 0.25s linear;
+}
+
 /* ─── VIDEO BOX ─── */
 .video-box{
   background:var(--bg2);
@@ -769,7 +806,7 @@ footer{
   .guarantee-section{padding:42px 24px;}
   .cta-section{padding:48px 24px;}
   .sticky-bar{padding:11px 18px;}
-  .flash{padding:9px 18px;font-size:11px;letter-spacing:0;}
+  .flash{padding:8px 16px;font-size:10.5px;letter-spacing:0;gap:4px;flex-wrap:nowrap;}
   .header{padding:12px 20px;}
   footer{padding:32px 24px;}
 }
@@ -781,7 +818,9 @@ footer{
   .social-strip{padding:16px 20px;}
   .guarantee-section{padding:38px 20px;}
   .cta-section{padding:44px 20px;}
-  .flash{padding:8px 14px;font-size:10.5px;}
+  .flash{padding:7px 10px;font-size:9.5px;gap:3px;flex-wrap:nowrap;white-space:nowrap;}
+  .flash-dot{display:none;}
+  .flash-badge{font-size:8.5px;padding:2px 6px;}
   .header{padding:11px 18px;}
 }
 
@@ -896,14 +935,6 @@ footer{
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="logo">
-    <img src="logo.png" alt="Content cu AI" height="36" style="height:36px;width:auto;display:block;">
-  </div>
-  <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
-</header>
-
 <!-- FLASH BAR -->
 <div class="flash">
   <span class="flash-strike">215€</span>
@@ -913,6 +944,14 @@ footer{
   <span class="flash-dot"></span>
   Oferta expiră în <strong id="countdown">--:--:--</strong>
 </div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <img src="logo.png" alt="Content cu AI" height="36" style="height:36px;width:auto;display:block;">
+  </div>
+  <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
+</header>
 
 <!-- HERO -->
 <section class="hero" aria-label="Hero section">
@@ -930,10 +969,26 @@ footer{
 <!-- HERO GRID: VIDEO + PRICE CARD -->
 <div class="hero-grid">
   <!-- VSL Video -->
-  <div class="video-box vsl-box">
-    <video controls preload="metadata" poster="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;">
+  <div class="video-box vsl-box" id="vslBox">
+    <video id="vslVideo" autoplay muted playsinline preload="auto"
+      style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;">
       <source src="https://assets.cdn.filesafe.space/ibeemZvlqhWQCUyb9xkt/media/69e9fac5a1636a6c65718481.mp4" type="video/mp4">
     </video>
+    <!-- Sound overlay -->
+    <div class="vsl-overlay" id="vslOverlay">
+      <div class="vsl-sound-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <span class="vsl-sound-label">Click pentru sunet</span>
+    </div>
+    <!-- Progress bar -->
+    <div class="vsl-progress-track">
+      <div class="vsl-progress-fill" id="vslBar"></div>
+    </div>
   </div>
 
   <!-- Price Card -->
@@ -1057,9 +1112,9 @@ footer{
     <div class="showcase-v2-card">
       <div class="showcase-v2-media">
         <video class="sc-cycle" data-idx="0"
-          data-videos="https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776339226/Untitled_Video_1_iwfvi2.mp4,https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776339247/Untitled_Video_y8uxkw.mp4,https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776339226/Avatar_Video_vx5lh2.mp4"
+          data-videos="https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776944685/hf_20260201_172723_690fba22-ee91-4ec2-b726-2dbf79a6b559_fmr7wa.mp4,https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776945048/hf_20260201_175509_4c2671e5-abee-4ad2-9532-5a5e6a69c86f_ijovzz.mp4"
           muted playsinline preload="none">
-          <source src="https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776339226/Untitled_Video_1_iwfvi2.mp4" type="video/mp4">
+          <source src="https://res.cloudinary.com/dpe5hpxir/video/upload/q_auto/v1776944685/hf_20260201_172723_690fba22-ee91-4ec2-b726-2dbf79a6b559_fmr7wa.mp4" type="video/mp4">
         </video>
         <span class="sc-num">03</span>
       </div>
@@ -1614,24 +1669,40 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     if (video.dataset.loaded) return;
     video.dataset.loaded = '1';
 
-    var list = video.getAttribute('data-videos').split(',');
+    var list = video.getAttribute('data-videos').split(',').filter(Boolean);
     var idx = 0;
+    var switching = false;
 
-    // seteaza src-ul initial daca nu e setat deja
-    if (!video.src || video.src === window.location.href) {
-      video.src = list[0];
+    function loadAndPlay(url) {
+      switching = true;
+      video.src = url;
+      video.load();
+      // Asteapta canplay inainte de play (fix blocare dupa refresh)
+      function onReady() {
+        video.removeEventListener('canplay', onReady);
+        video.removeEventListener('error', onError);
+        switching = false;
+        video.play().catch(function(){});
+      }
+      function onError() {
+        video.removeEventListener('canplay', onReady);
+        video.removeEventListener('error', onError);
+        switching = false;
+        // Skip la urmatorul video daca e eroare
+        playNext();
+      }
+      video.addEventListener('canplay', onReady);
+      video.addEventListener('error', onError);
     }
-    video.load();
 
     function playNext() {
+      if (switching) return;
       idx = (idx + 1) % list.length;
-      video.src = list[idx];
-      video.load();
-      video.play().catch(function(){});
+      loadAndPlay(list[idx]);
     }
 
     video.addEventListener('ended', playNext);
-    video.play().catch(function(){});
+    loadAndPlay(list[0]);
   }
 
   // IntersectionObserver: incarca videoul doar cand e vizibil
@@ -1640,38 +1711,79 @@ document.querySelectorAll('.reveal').forEach(function(el) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           initVideo(entry.target);
-          // pauzeaza video-urile care nu se vad
         } else {
           var v = entry.target;
-          if (v.dataset.loaded) v.pause();
+          if (v.dataset.loaded && !v.paused) v.pause();
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
     videos.forEach(function(v) {
-      // sterge autoplay si src initial ca sa nu incarce la load
       v.removeAttribute('autoplay');
       v.removeAttribute('src');
-      // curata source-urile copil
-      var sources = v.querySelectorAll('source');
-      sources.forEach(function(s){ s.removeAttribute('src'); });
-      v.load(); // reseteaza
+      v.querySelectorAll('source').forEach(function(s){ s.removeAttribute('src'); });
+      v.load();
       observer.observe(v);
     });
 
   } else {
-    // fallback pentru browsere vechi
     videos.forEach(function(v) { initVideo(v); });
   }
 
-  // reia playback-ul cand revii la tab
+  // Reia playback cand revii la tab
   document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
       videos.forEach(function(v) {
-        if (v.dataset.loaded && v.paused) v.play().catch(function(){});
+        if (v.dataset.loaded && v.paused && !v.ended) v.play().catch(function(){});
       });
     }
   });
+})();
+
+// ─── VSL PLAYER: autoplay muted + click-to-unmute + progress bar ───
+(function() {
+  var video = document.getElementById('vslVideo');
+  var overlay = document.getElementById('vslOverlay');
+  var bar = document.getElementById('vslBar');
+  if (!video || !overlay || !bar) return;
+
+  // Fake progress: start at ~82%, move to 100% fast in 2.5s, then follow real progress
+  var fakePhase = true;
+  var fakeStart = null;
+  var fakeDuration = 2500; // ms
+  var fakeStartPct = 82;
+
+  function rafLoop() {
+    if (fakePhase) {
+      if (!fakeStart) fakeStart = Date.now();
+      var elapsed = Date.now() - fakeStart;
+      var pct = fakeStartPct + ((elapsed / fakeDuration) * (100 - fakeStartPct));
+      if (pct >= 100 || elapsed >= fakeDuration) {
+        fakePhase = false;
+        pct = 100;
+      }
+      bar.style.width = pct + '%';
+    } else {
+      if (video.duration) {
+        bar.style.width = (video.currentTime / video.duration * 100) + '%';
+      }
+    }
+    requestAnimationFrame(rafLoop);
+  }
+  requestAnimationFrame(rafLoop);
+
+  // Click overlay → unmute
+  overlay.addEventListener('click', function() {
+    video.muted = false;
+    video.volume = 1;
+    overlay.classList.add('hidden');
+    // Daca video s-a oprit, porneste-l
+    if (video.paused) video.play().catch(function(){});
+  });
+
+  // Try autoplay
+  var p = video.play();
+  if (p && p.catch) p.catch(function(){});
 })();
 
 // ─── REDUCED MOTION CHECK ───
