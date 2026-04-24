@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Content cu AI — de la 0 la 100</title>
-<meta name="description" content="Înveți să creezi content cu AI de la 0 la 100. Reclame, B-roll, imagini, video-uri și sisteme complete.">
+<title>Content cu AI — în doar 2 zile</title>
+<meta name="description" content="Înveți să creezi content cu AI în doar 2 zile. Reclame, B-roll, imagini și video-uri — de la zero, pas cu pas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/logo.png">
+
 <style>
 /* ─── RESET & BASE ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -208,11 +208,12 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
   max-width:100%;
 }
 @keyframes glowPulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
-.hero-sub{font-size:16px;color:var(--text2);max-width:580px;margin-bottom:48px;line-height:1.7;font-weight:400;}
+.hero-sub{font-size:clamp(17px,2vw,22px);color:var(--text);max-width:720px;margin-top:28px;margin-bottom:0;line-height:1.55;font-weight:400;}
 
 /* ─── HERO GRID ─── */
-.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;max-width:1080px;margin:0 auto 80px;padding:0 40px;}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;padding:0 20px;}}
+.hero-grid{display:flex;justify-content:center;max-width:1080px;margin:36px auto 80px;padding:0 40px;}
+@media(max-width:900px){.hero-grid{padding:0 20px;}}
+.hero-grid .price-card{width:100%;max-width:420px;}
 
 /* ─── VSL PLAYER ─── */
 .vsl-sound-badge{
@@ -278,7 +279,6 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
   border:1px solid var(--border);
   border-radius:16px;
   padding:28px;
-  position:sticky;top:72px;
   box-shadow:0 8px 32px rgba(0,0,0,0.04);
 }
 .price-old{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:3px;font-weight:400;}
@@ -791,7 +791,7 @@ footer{
   .section-title{margin-bottom:28px;}
   .divider{margin:44px 0;}
   .hero h1{line-height:1.1;}
-  .hero-sub{margin-bottom:36px;}
+  .hero-sub{font-size:16px;}
   .s-new{font-size:24px;}
   .s-old{font-size:12px;}
   .s-btn{padding:10px 20px;font-size:13px;}
@@ -938,7 +938,7 @@ footer{
 
 <!-- FLASH BAR -->
 <div class="flash">
-  🔥 Doar <strong>17 de locuri</strong> rămase
+  🔥 Doar <strong>17 locuri</strong> rămase
   <span class="flash-dot"></span>
   Oferta expiră în <strong id="countdown">--:--:--</strong>
 </div>
@@ -965,15 +965,10 @@ footer{
   </div>
   <div class="hero-headline-wrap">
     <div class="hero-glow" aria-hidden="true"></div>
-    <h1>Înveți să creezi content<br>cu AI de la <em>0 la 100</em></h1>
+    <h1>Înveți să creezi content<br>cu AI <em>în doar 2 zile</em></h1>
   </div>
-  <p class="hero-sub">Reclame, B-roll, imagini, video-uri și sisteme complete — toolurile și workflow-urile exacte pe care le folosesc creatorii care produc de <strong style="color:var(--accent);">3x mai mult</strong>, fără să lucreze dublu.</p>
-</section>
-
-<!-- HERO GRID: VIDEO + PRICE CARD -->
-<div class="hero-grid">
-  <!-- VSL Video -->
-  <div class="video-box vsl-box" id="vslBox" style="position:relative;">
+  <!-- VSL Video — sub titlu -->
+  <div class="video-box vsl-box" id="vslBox" style="position:relative;margin-top:32px;width:100%;max-width:800px;">
     <video id="vslVideo" autoplay muted playsinline preload="auto" controls
       style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;">
       <source src="https://assets.cdn.filesafe.space/ibeemZvlqhWQCUyb9xkt/media/69e9fac5a1636a6c65718481.mp4" type="video/mp4">
@@ -988,7 +983,12 @@ footer{
       Tap pentru sunet
     </div>
   </div>
+  <!-- Descriere — sub VSL -->
+  <p class="hero-sub">Reclame, B-roll, imagini și video-uri cu AI — <strong>de la zero, pas cu pas.</strong> Aceleași sisteme pe care le folosesc creatorii care <strong>cresc rapid pe social media</strong> și își <strong>scalează afacerea</strong>, fără să lucreze dublu.</p>
+</section>
 
+<!-- HERO GRID: PRICE CARD -->
+<div class="hero-grid">
   <!-- Price Card -->
   <div class="price-card" role="complementary" aria-label="Prețul cursului">
     <div class="price-old">215€</div>
@@ -1044,7 +1044,7 @@ footer{
     </div>
     <div class="stat-divider" aria-hidden="true"></div>
     <div class="stat-item">
-      <div class="stat-num" data-target="20">0</div>
+      <div class="stat-num" data-target="17">0</div>
       <div class="stat-label">Locuri Rămase</div>
     </div>
   </div>
