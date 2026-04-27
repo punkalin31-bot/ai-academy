@@ -217,28 +217,6 @@ h1,h2,h3,h4{font-family:'Inter Tight',sans-serif;line-height:1.1;letter-spacing:
 @media(max-width:900px){.hero-grid{padding:0 20px;}}
 .hero-grid .price-card{width:100%;max-width:420px;}
 
-/* ─── VSL PLAYER ─── */
-.vsl-sound-badge{
-  position:absolute;top:12px;left:12px;
-  display:flex;align-items:center;gap:7px;
-  background:rgba(0,0,0,0.62);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.18);
-  border-radius:100px;
-  padding:6px 14px 6px 10px;
-  cursor:pointer;
-  z-index:10;
-  color:#fff;
-  font-family:'Inter Tight',sans-serif;
-  font-size:12px;font-weight:700;
-  letter-spacing:0.02em;
-  transition:opacity 0.25s,transform 0.2s;
-  white-space:nowrap;
-  user-select:none;
-}
-.vsl-sound-badge:hover{background:rgba(0,0,0,0.78);transform:scale(1.03);}
-.vsl-sound-badge.muted-off{opacity:0;pointer-events:none;}
-.vsl-sound-badge svg{flex-shrink:0;}
 
 /* ─── HEADER PRICE ─── */
 .header-price{display:flex;align-items:center;gap:6px;margin-right:10px;}
@@ -969,21 +947,20 @@ footer{
     <div class="hero-glow" aria-hidden="true"></div>
     <h1>Înveți să creezi content<br>cu AI <em>în doar 2 zile</em></h1>
   </div>
-  <!-- VSL Video — sub titlu -->
-  <div class="video-box vsl-box" id="vslBox" style="position:relative;margin-top:32px;width:100%;max-width:800px;">
-    <video id="vslVideo" autoplay muted playsinline preload="auto" controls
-      style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;">
-      <source src="https://assets.cdn.filesafe.space/ibeemZvlqhWQCUyb9xkt/media/69e9fac5a1636a6c65718481.mp4" type="video/mp4">
-    </video>
-    <!-- Compact sound badge -->
-    <div class="vsl-sound-badge" id="vslSoundBadge">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white"/>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        <line x1="17" y1="1" x2="7" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      Tap pentru sunet
-    </div>
+  <!-- VSL Video — Vidalytics embed -->
+  <div style="margin-top:32px;width:100%;max-width:800px;border-radius:14px;overflow:hidden;">
+    <div id="vidalytics_embed_WKrPnBIza0KExCUO" style="width:100%;position:relative;padding-top:56.25%;"></div>
+    <script type="text/javascript">
+    (function (v, i, d, a, l, y, t, c, s) {
+        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+        if (!vsl){vsl=function(u,cb){
+            if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+            if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+            i.getElementsByTagName("head")[0].appendChild(s);
+        };}
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();[t.run](http://t.run)(a);});});
+    })(window, document, 'Vidalytics', 'vidalytics_embed_WKrPnBIza0KExCUO', 'https://fast.vidalytics.com/embeds/A71Au1Vi/WKrPnBIza0KExCUO/');
+    </script>
   </div>
   <!-- Descriere — sub VSL -->
   <p class="hero-sub">Reclame, B-roll, imagini și video-uri cu AI — <strong>de la zero, pas cu pas.</strong> Aceleași sisteme pe care le folosesc creatorii care <strong>cresc rapid pe social media</strong> și își <strong>scalează afacerea</strong>, fără să lucreze dublu.</p>
@@ -1797,25 +1774,6 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   });
 })();
 
-// ─── VSL PLAYER: autoplay muted + compact sound badge ───
-(function() {
-  var video = document.getElementById('vslVideo');
-  var badge = document.getElementById('vslSoundBadge');
-  if (!video || !badge) return;
-
-  // Click badge → unmute, hide badge
-  badge.addEventListener('click', function(e) {
-    e.stopPropagation();
-    video.muted = false;
-    video.volume = 1;
-    badge.classList.add('muted-off');
-    if (video.paused) video.play().catch(function(){});
-  });
-
-  // Try autoplay muted
-  var p = video.play();
-  if (p && p.catch) p.catch(function(){});
-})();
 
 // ─── REDUCED MOTION CHECK ───
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
