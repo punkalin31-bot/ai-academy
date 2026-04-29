@@ -918,7 +918,7 @@ footer{
 
 <!-- FLASH BAR -->
 <div class="flash">
-  🔥 Doar <strong>17 locuri</strong> rămase
+  🔥 Doar <strong id="spots-flash">17 locuri</strong> rămase
   <span class="flash-dot"></span>
   Oferta expiră în <strong id="countdown">--:--:--</strong>
 </div>
@@ -933,7 +933,7 @@ footer{
       <span class="header-old-price">215€</span>
       <span class="header-disc-badge">-73% REDUCERE</span>
     </div>
-    <a href="#cta" class="header-btn" aria-label="Vreau accesul la curs">Vreau accesul →</a>
+    <a href="https://buy.stripe.com/cNicN65G74P7bYc67V2880h" class="header-btn" aria-label="Vreau accesul la curs" target="_blank" rel="noopener">Vreau accesul →</a>
   </div>
 </header>
 
@@ -973,7 +973,7 @@ footer{
     <div class="price-old">215€</div>
     <div class="price-main"><sup>€</sup>59</div>
     <div class="price-save">Economisești 156€ · Lansare</div>
-    <a href="#cta" class="buy-btn">Vreau accesul acum →</a>
+    <a href="https://buy.stripe.com/cNicN65G74P7bYc67V2880h" class="buy-btn" target="_blank" rel="noopener">Vreau accesul acum →</a>
     <p class="secure">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       Plată sigură · Acces instant după plată
@@ -1507,7 +1507,7 @@ footer{
     <span class="cta-new"><sup>€</sup>59</span>
     <span class="cta-save">Economisești 156€</span>
   </div>
-  <a href="#" class="cta-btn" role="button">Vreau accesul acum →</a>
+  <a href="https://buy.stripe.com/cNicN65G74P7bYc67V2880h" class="cta-btn" role="button" target="_blank" rel="noopener">Vreau accesul acum →</a>
   <p class="cta-note">🔒 Plată sigură · Acces instant · Acces pe viață</p>
 </section>
 
@@ -1518,7 +1518,7 @@ footer{
     <span class="s-new">€59</span>
     <span class="s-save">Economisești 156€</span>
   </div>
-  <a href="#cta" class="s-btn" role="button">Vreau accesul acum →</a>
+  <a href="https://buy.stripe.com/cNicN65G74P7bYc67V2880h" class="s-btn" role="button" target="_blank" rel="noopener">Vreau accesul acum →</a>
 </div>
 
 <!-- FOOTER -->
@@ -1598,6 +1598,27 @@ function checkSticky() {
 }
 window.addEventListener('scroll', checkSticky, { passive: true });
 checkSticky();
+
+// ─── SPOTS COUNTER (19→0, reset la fiecare 5h) ───
+(function() {
+  var MAX = 19;
+  var INTERVAL = 5 * 60 * 60 * 1000;
+  var key = 'cai_spots_start';
+  var stored = localStorage.getItem(key);
+  var startTime = stored ? parseInt(stored, 10) : Date.now();
+  if (!stored) localStorage.setItem(key, startTime);
+  var decreased = Math.floor((Date.now() - startTime) / INTERVAL);
+  var spots = MAX - decreased;
+  if (spots <= 0) {
+    startTime = Date.now();
+    localStorage.setItem(key, startTime);
+    spots = MAX;
+  }
+  var flashEl = document.getElementById('spots-flash');
+  if (flashEl) flashEl.textContent = spots + ' locuri';
+  var statEl = document.querySelector('.stat-num[data-target="17"]');
+  if (statEl) statEl.setAttribute('data-target', spots);
+})();
 
 // ─── STAT COUNTER ANIMATION ───
 function animateCounter(el) {
